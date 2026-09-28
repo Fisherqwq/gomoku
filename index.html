@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="本地运行的五子棋对弈应用，内置 Minimax + VCT/VCF AI 引擎，无需联网">
+  <title>五子棋 · 本地对弈</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-stones" aria-hidden="true"><i class="s-black"></i><i class="s-white"></i></span>
+        <span class="logo-text">五子棋<small>Gomoku</small></span>
+      </div>
+      <span class="badge">⚡ 本地引擎 · 无需联网</span>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="board-panel" aria-label="棋盘">
+      <div class="board-frame">
+        <canvas id="gomokuCanvas" width="620" height="620"></canvas>
+      </div>
+    </section>
+
+    <aside class="side-panel">
+      <div class="card status-card">
+        <div class="turn-indicator">
+          <span class="stone-icon black" id="turnStone"></span>
+          <span id="statusText">你的回合 · 执黑先行</span>
+          <span class="thinking" id="thinkingIndicator" aria-hidden="true"><i></i><i></i><i></i></span>
+        </div>
+        <div class="move-count">第 <b id="moveCount">0</b> 手</div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">难度</div>
+        <div class="difficulty" id="difficultyGroup">
+          <button type="button" class="diff-btn" data-depth="2" data-vct="0" data-vctdepth="8">简单</button>
+          <button type="button" class="diff-btn active" data-depth="4" data-vct="1" data-vctdepth="8">中等</button>
+          <button type="button" class="diff-btn" data-depth="6" data-vct="1" data-vctdepth="8">困难</button>
+        </div>
+        <p class="card-hint" id="diffHint">搜索深度 4 层 · VCT 算杀 8 层</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">对局</div>
+        <div class="actions">
+          <button type="button" class="btn btn-primary" id="restartBtn">新对局</button>
+          <button type="button" class="btn" id="undoBtn" disabled>悔棋</button>
+        </div>
+        <div class="scoreboard">
+          <div class="score-item">
+            <span class="stone-icon black"></span><span class="score-name">你</span>
+            <b id="playerScore">0</b>
+          </div>
+          <span class="score-divider">:</span>
+          <div class="score-item">
+            <b id="aiScore">0</b><span class="score-name">AI</span>
+            <span class="stone-icon white"></span>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <footer class="site-footer">
+    <p>纯静态应用 · Minimax + α-β 剪枝 + VCT/VCF · 所有计算在本地浏览器完成</p>
+  </footer>
+
+  <script src="js/gomoku.js"></script>
+</body>
+</html>
